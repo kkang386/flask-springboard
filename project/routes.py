@@ -1,5 +1,6 @@
 from flask import request
 import json
+from project.controllers import Video
 
 
 def configure_routes(app):
@@ -26,3 +27,8 @@ def configure_routes(app):
             return 'Ok', 200
         else:
             return 'Bad Request', 400
+
+def configure_api_routes(api):
+    # Register the resource
+    api.add_resource(Video, "/video/<int:video_id>")
+
