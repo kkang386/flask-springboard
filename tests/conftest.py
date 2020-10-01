@@ -7,12 +7,10 @@ from project import app, db, configClass
 from project.models import User, VideoModel
 import config
 
-@pytest.yield_fixture
+@pytest.yield_fixture(scope='module')
 def setup_test_db():
     def _setup_test_db(app):
-        # print ("configClass:", configClass, type(configClass))
         if app.config['SQLALCHEMY_DATABASE_URI'] == config.TestingConfig.SQLALCHEMY_DATABASE_URI:
-            print ("do db.drop_all()")
             # always starting with an empty DB
             db.drop_all()
             db.create_all()
