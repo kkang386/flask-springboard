@@ -1,6 +1,7 @@
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from project.models import User, VideoModel
-from project import db
+from project import db, app_cache
+import sys
 
 # make new request parser object
 video_put_args = reqparse.RequestParser()
@@ -25,9 +26,18 @@ resource_fields = {
 class Video (Resource):
     @marshal_with(resource_fields) # decorator will help serialize the data to json
     def get(self, video_id):
+        cache_key = f"video_id:{video_id}"
+        cached_res = app_cache.get(cache_key)
+        if cached_res is not None:
+            #sys.stderr.write(f"found cache\n")
+            return cached_res
+
         result = VideoModel.query.filter_by(id = video_id).first()
         if not result:
             abort(404, message=f"Video id {video_id} don't exist.")
+
+        #sys.stderr.write(f"new cache object created\n")
+        app_cache.set(cache_key, result)
         return result
 
     @marshal_with(resource_fields) # decorator will help serialize the data to json

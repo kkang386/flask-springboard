@@ -11,6 +11,8 @@ class Config(object):
     SQLALCHEMY_DATABASE_URL = ''
     ENV_NAME=''
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    CACHE_TYPE = "simple" # Flask-Caching related configs
+    CACHE_DEFAULT_TIMEOUT = 300
 
 class ProductionConfig(Config):
     DEBUG = False

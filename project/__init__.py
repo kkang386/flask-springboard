@@ -5,7 +5,7 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from project.envs import Envs
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
-
+from flask_caching import Cache
 
 envs = Envs('config')
 # sys.argv[1] won't work if pytest runner want to run a specific test file.
@@ -13,6 +13,7 @@ envs = Envs('config')
 configClass = envs.get_env(os.environ["ENV_NAME"])
 app = Flask(__name__)
 app.config.from_object(configClass)
+app_cache = Cache(app)
 api = Api(app)
 
 # db.init_app(app)
@@ -21,5 +22,5 @@ db = SQLAlchemy(app)
 #from project.models import User, VideoModel
 from project.routes import configure_routes, configure_api_routes
 
-configure_routes(app)
+configure_routes(app, app_cache)
 configure_api_routes(api)
