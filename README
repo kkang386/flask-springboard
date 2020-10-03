@@ -1,0 +1,54 @@
+Intend:
+    This code base serve a basic setup for starting up new Flask project for API and simple web pages. It demonstrates the ways of how to do the followings:
+        * Isolate configuration into a single file: config.py, so it maybe updated, patched for different environments without touch the rest of the code.
+        * Isolate db model into a single file: project/models.py, so that db init, pytest and app may run independently without code changes.
+        * Isolate routing setup out from app code into a single file: project/routes.py, so that route definitions are clean and easy to maintain.
+        * Easy runtime environemnt selection with short env names than the long class names.
+        * Reusable db setup script: setup.py, it maybe run againest any environment.  
+        * Sample unitests with pytest including tests on db setup and tear down, sample data setup from files, web pages access, api access
+        * Showing usage of following key modules and features: flask_sqlalchemy, flask_restful api Resource, flask_caching, reqparse, 
+            marshal_with, pytest, fixtures, sqlite, PyMySQL
+
+Design, to be brief:
+
+    Core: 
+        config.py
+
+        project/envs.py
+
+        project/models.py
+
+        project/controllers.py
+
+        project/routes.py 
+
+        project/__init__.py
+
+    Consumers:
+    
+        setup.py
+    
+        main.py
+
+        tests/test_*
+
+
+Usages:
+
+    source ./bin/activate
+
+    export ENV_NAME=test
+
+    pytest tests
+
+    export ENV_NAME=dev
+
+    python setup.py
+
+    python main.py    
+    
+
+
+
+    
+
