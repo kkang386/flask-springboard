@@ -2,7 +2,6 @@
 pyvenv.cfg
 bin/
 lib/
-project/db/
 project/__pycache__/
 tests/__pycache__/
 __pycache__/
