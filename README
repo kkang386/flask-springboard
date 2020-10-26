@@ -76,8 +76,12 @@ Usage:
     
         ...
 
+    Production run:
+
+        waitress-serve --port=5000 waitress_server:app &
+
 Requirements:
     
         Python 3.8 or close
     
-        Brian and Will
+        Brain and Will
