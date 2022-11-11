@@ -48,7 +48,7 @@ Usage:
 
     Install:
 
-        git clone https://github.com/kennyj2016/flask-startup.git 
+        git clone https://github.com/kkang386/flask-startup.git 
 
         cd flask-startup
 
